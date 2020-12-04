@@ -54,6 +54,10 @@ resource "kubernetes_deployment" "webapplication-deploy" {
 resource "kubernetes_service" "webapplication-service" {
   metadata {
     name = "webapplication-service"
+    labels = {
+          team = "42"
+          app = "frontend"
+        }
   }
   spec {
     selector = {
@@ -66,4 +70,5 @@ resource "kubernetes_service" "webapplication-service" {
 
     type = "NodePort"
   }
+  depends_on = [ kubernetes_namespace.webapplication-namespace ]
 }
