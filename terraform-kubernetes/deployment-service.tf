@@ -36,7 +36,7 @@ resource "kubernetes_deployment" "webapplication-deploy" {
       metadata {
         labels = {
           team = "42"
-          app = "frontend"
+          app  = "frontend"
         }
       }
 
@@ -45,19 +45,19 @@ resource "kubernetes_deployment" "webapplication-deploy" {
           image = "nginx:1.19.4-alpine"
           name  = "frontend-app"
 
-          }
         }
       }
     }
   }
+}
 
 resource "kubernetes_service" "webapplication-service" {
   metadata {
     name = "webapplication-service"
     labels = {
-          team = "42"
-          app = "frontend"
-        }
+      team = "42"
+      app  = "frontend"
+    }
   }
   spec {
     selector = {
@@ -70,5 +70,5 @@ resource "kubernetes_service" "webapplication-service" {
 
     type = "NodePort"
   }
-  depends_on = [ kubernetes_namespace.webapplication-namespace ]
+  depends_on = [kubernetes_namespace.webapplication-namespace]
 }
